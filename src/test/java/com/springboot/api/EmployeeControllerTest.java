@@ -51,13 +51,13 @@ public class EmployeeControllerTest {
     @Order(2)
     @Test
     public void testGetEmployees() throws Exception {
-        mockMvc.perform(get("/employees")).andExpect(status().isOk()).andExpect(jsonPath("$[0].firstName").value("John"));
+        mockMvc.perform(get("/employees")).andExpect(status().isOk()).andExpect(jsonPath("$[3].firstName").value("John"));
     }
 
     @Order(3)
     @Test
     public void testGetEmployee() throws Exception {
-        mockMvc.perform(get("/employee/1")).andExpect(status().isOk()).andExpect(jsonPath("$.firstName").value("John"));
+        mockMvc.perform(get("/employee/4")).andExpect(status().isOk()).andExpect(jsonPath("$.firstName").value("John"));
     }
 
     @Order(4)
@@ -75,7 +75,7 @@ public class EmployeeControllerTest {
         String json = objectMapper.writeValueAsString(employee);
 
         // Update the employee in the database
-        mockMvc.perform(put("/update/employee/1")
+        mockMvc.perform(put("/update/employee/4")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk())
@@ -86,11 +86,11 @@ public class EmployeeControllerTest {
     @Test
     public void testDeleteEmployee() throws Exception {
         // Delete the employee
-        mockMvc.perform(delete("/remove/employee/1"))
+        mockMvc.perform(delete("/remove/employee/4"))
                 .andExpect(status().isOk());
 
         // Check that the employee has been deleted
-        mockMvc.perform(get("/employee/1"))
+        mockMvc.perform(get("/employee/4"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").doesNotExist());
     }

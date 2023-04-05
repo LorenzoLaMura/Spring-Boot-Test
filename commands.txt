@@ -5,3 +5,4 @@ mvn test
 sudo docker build -t springboot .
 docker run -p 8080:2222 springboot
 Go to http://localhost:8080/swagger-ui/index.html
+For mysql database docker-compose up -d and then mysql -u root -p
